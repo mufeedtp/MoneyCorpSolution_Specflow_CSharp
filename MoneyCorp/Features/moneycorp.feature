@@ -3,8 +3,7 @@
 A short summary of the feature
 
 @tag1
-  Scenario: Verify question
-
+  Scenario: Verify article links
     Given MoneyCorp website opened
     When Select the region and language "USA English"
     Then verify the selected region is displayed
