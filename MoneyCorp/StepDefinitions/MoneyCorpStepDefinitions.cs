@@ -7,12 +7,12 @@ namespace MoneyCorp.StepDefinitions
     public sealed class MoneyCorpStepDefinitions 
     {
         private IWebDriver driver;
-        private MoneyCorpPage moneycorppage;
+        private MoneyCorpPage _moneycorppage;
         // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
         public MoneyCorpStepDefinitions()
         {
             this.driver = DriverInstance.getDriver;
-            moneycorppage = new MoneyCorpPage(driver);
+            _moneycorppage = new MoneyCorpPage(driver);
         }
 
         [Given(@"MoneyCorp website opened")]
@@ -24,50 +24,50 @@ namespace MoneyCorp.StepDefinitions
         [When(@"Select the region and language ""([^""]*)""")]
         public void WhenSelectTheRegionAndLanguage(string region)
         {
-            moneycorppage.selectRegion(region);
+            _moneycorppage.selectRegion(region);
         }
 
         
         [Then(@"verify the selected region is displayed")]
         public void ThenVerifyTheSelectedRegionIsDisplayed()
         {
-            moneycorppage.verifyRegionSelected();
+            _moneycorppage.verifyRegionSelected();
         }
 
         [Then(@"click on find out more for Foreign exchange Solutions")]
         public void ThenClickOnFindOutMoreForForeignExchangeSolutions()
         {
-            moneycorppage.clickOnFindOutMore();
+            _moneycorppage.clickOnFindOutMore();
         }
 
         [Then(@"verify Foreign exchange Solutions page arrived")]
         public void ThenVerifyForeignExchangeSolutionsPageArrived()
         {
-            moneycorppage.verifyForeignExchangeSolutionsPageDisplayed();
+            _moneycorppage.verifyForeignExchangeSolutionsPageDisplayed();
         }
 
         [Then(@"Search ""([^""]*)""")]
         public void ThenSearch(string searchItem)
         {
-            moneycorppage.seachItem(searchItem);
+            _moneycorppage.seachItem(searchItem);
         }
 
         [Then(@"Verify search result page is arrived")]
         public void ThenVerifySearchResultPageIsArrived()
         {
-            moneycorppage.verifySearchReultPageDisplayed();
+            _moneycorppage.verifySearchReultPageDisplayed();
         }
 
         [Then(@"click show more results until not available")]
         public void ThenClickShowMoreResultsUntilNotAvailable()
         {
-            moneycorppage.clickShowMoreResultUntillNotAvailable();
+            _moneycorppage.clickShowMoreResultUntillNotAvailable();
         }
 
         [Then(@"verify all articles has link starting with")]
         public void ThenVerifyAllArticlesHasLinkStartingWith()
         {
-            moneycorppage.verifyArticleLink();            
+            _moneycorppage.verifyArticleLink();            
         }
 
 
