@@ -1,6 +1,5 @@
 ﻿Feature: moneycorp
-
-A short summary of the feature
+    create test   
 
 @tag1
   Scenario: Verify article links

@@ -6,12 +6,14 @@ using System.Text;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
 using SeleniumExtras.WaitHelpers;
+using MoneyCorp.Report;
+using AventStack.ExtentReports;
+using AventStack.ExtentReports.Gherkin.Model;
 
 namespace NopCommerce.TestBase
 {
     public class ComponentGneric
     {
-        //public IWebDriver driver { get; }
         private IWebDriver driver;
         private By ComponentLocator;
         private string ComponentName;
@@ -22,9 +24,7 @@ namespace NopCommerce.TestBase
         {
             this.driver = driver;
             ComponentLocator = componentLocator;
-            //SeleniumElement = (IWebElement)componentLocator;
             ComponentName = componentName;
-            //PageFactory.InitElements(driver, this);
         }
         
         public void waitForElement(IWebElement element)
@@ -45,21 +45,12 @@ namespace NopCommerce.TestBase
             try
             {
                 scrollToElement();
-                //SeleniumElement = driver.FindElement(ComponentLocator);
-                //SeleniumElement = waitForElement(SeleniumElement);
-                //if(SeleniumElement !=null )
-                //{ 
-                //SeleniumElement.Click();
                 ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].click();", SeleniumElement);
-                //extent.SetStepStatusPass($"Clicked on the {ComponentName}.");
-                //serilog.Log_Info($"Clicked on the {ComponentName}.");
-                //}
+                ExtentReport.LogInfo($"Clicked on the { ComponentName }.");
             }
             catch (Exception ex)
             {
-                //extent.SetStepStatusFail(ex);
-                //serilog.Log_Error(ex.Message);
-                throw ex;
+                ExtentReport.LogError(ex.ToString());
             }
 
         }
@@ -69,20 +60,10 @@ namespace NopCommerce.TestBase
             try
             {
                 scrollToElement();
-                //SeleniumElement = driver.FindElement(ComponentLocator);
-                //SeleniumElement = waitForElement(SeleniumElement);
-                //if (SeleniumElement != null )
-                //{
                 SeleniumElement.Clear();
                 SeleniumElement.SendKeys(input);
-                //extent.SetStepStatusPass($"Entered text [{input.ToString()}] in the {ComponentName}.");
-                //serilog.Log_Info($"Entered text [{input.ToString()}] in the {ComponentName}.");
-                //}
             }
             catch (Exception ex){
-
-                //extent.SetStepStatusFail(ex);
-                //serilog.Log_Error(ex.Message);
                 throw ex;
             }
 
@@ -92,15 +73,12 @@ namespace NopCommerce.TestBase
         {
             try
             {
-                //SeleniumElement = driver.FindElement(ComponentLocator);
-                //SeleniumElement = waitForElement(SeleniumElement);
                 scrollToElement();
                 return (SeleniumElement.Displayed) ? true : false;
             }
-            catch 
+            catch (Exception ex)
             {
-                //BaseClass.extent.SetStepStatusFail(ex);
-                //throw ex;
+                throw ex;
             }
             return false;
         }
@@ -110,8 +88,6 @@ namespace NopCommerce.TestBase
             try
             {
                 scrollToElement();
-                //SeleniumElement = driver.FindElement(ComponentLocator);
-                //SeleniumElement = waitForElement(SeleniumElement);
                 SeleniumElement.SendKeys(Keys.Enter);
                 //extent.SetStepStatusPass($"Pressed Enter key in the {ComponentName}.");
                 //serilog.Log_Info($"Pressed Enter key in the {ComponentName}.");
@@ -130,13 +106,9 @@ namespace NopCommerce.TestBase
             try
             {
                 waitForElement(SeleniumElement);
-                //SeleniumElement = driver.FindElement(ComponentLocator);
-                //if (SeleniumElement != null)
-                //{
                 IJavaScriptExecutor je = (IJavaScriptExecutor)driver;
                 je.ExecuteScript("arguments[0].scrollIntoView(true);", SeleniumElement);
-                //serilog.Log_Info($"Found  {ComponentName} = {ComponentLocator}.");
-                //}
+                ExtentReport.LogInfo($"Scorlled into the {ComponentName} elemnet to visible");
             }
             catch (Exception ex)
             {
@@ -150,8 +122,6 @@ namespace NopCommerce.TestBase
             try
             {
                 scrollToElement();
-                //SeleniumElement = driver.FindElement(ComponentLocator);
-                //SeleniumElement = waitForElement(SeleniumElement);
                 Actions actions = new Actions(driver);
                 actions.MoveToElement(SeleniumElement).Click().Perform();
                 //extent.SetStepStatusPass($"Mouse overed on the {ComponentName} and clicked - {ComponentLocator}.");
@@ -171,9 +141,7 @@ namespace NopCommerce.TestBase
             var text = "";
             try
             {
-                scrollToElement();
-                //SeleniumElement = driver.FindElement(ComponentLocator);
-                //SeleniumElement = waitForElement(SeleniumElement);
+                scrollToElement();;
                 string elementText = SeleniumElement.Text;
                 //extent.SetStepStatusPass($"Retrieved text from the {ComponentName} - {elementText}.");
                 //serilog.Log_Info($"Retrieved text from the {ComponentName} - {elementText}.");
